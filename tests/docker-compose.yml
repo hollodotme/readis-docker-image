@@ -5,7 +5,7 @@ services:
     image: redis:3
   readis:
     container_name: readis_di_tests_readis
-    image: hollodotme/readis:2.1.0
+    image: hollodotme/readis:2.2.0
     ports:
       - 8079:80
     volumes:

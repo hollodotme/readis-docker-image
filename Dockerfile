@@ -1,6 +1,6 @@
 FROM php:7.2-cli
 ENV PHPREDIS_VERSION 4.0.2
-ENV READIS_VERSION 2.1.0
+ENV READIS_VERSION 2.2.0
 # System update and necessary software
 RUN apt-get update && apt-get install git libicu-dev g++ procps -y
 # Install xDebug
