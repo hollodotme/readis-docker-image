@@ -1,11 +1,13 @@
-version: '3'
+version: '3.7'
 services:
   redis:
+    image: redis
     container_name: readis_di_tests_redis
-    image: redis:3
   readis:
+    build:
+      dockerfile: Dockerfile
+      context: ../
     container_name: readis_di_tests_readis
-    image: hollodotme/readis:2.2.0
     ports:
       - 8079:80
     volumes:
