@@ -3,13 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a CHANGELOG](http://keepachangelog.com).
 
-## [2.2.1] - 2018-12-16
+## [2.2.1] - 2019-04-21
 
 ### Updated
 
+- docker base image to `php:7.3-cli-alpine`
 - readis version to 2.2.1
-- php-redis version to 4.2.0
-- base image version to php:7.3-cli
+- php-redis version to 4.3.0
+- automated composer install
 
 ### Removed
 
