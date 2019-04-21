@@ -6,7 +6,7 @@ services:
   readis:
     build:
       dockerfile: Dockerfile
-      context: ../
+      context: ../.docker/
     container_name: readis_di_tests_readis
     ports:
       - 8079:80
