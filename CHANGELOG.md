@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a CH
 
 ## [2.2.1] - 2019-04-21
 
+### Added
+
+- Automated docker image build/push on Circle CI
+
 ### Updated
 
 - docker base image to `php:7.3-cli-alpine`
