@@ -1,0 +1,53 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/repo
+    machine:
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run:
+          name: Build docker image
+          command: >
+            docker build
+            -t "hollodotme/readis"
+            -f .docker/Dockerfile
+            .docker
+      - run:
+          name: Tag image
+          command: |
+            TAG=$(git describe --exact-match ${CIRCLE_SHA1} | sed -e s/v//g)
+            MAJOR=$(echo ${RAW_TAG} | cut -d'.' -f1)
+            FEATURE=${MAJOR}.$(echo ${TAG} | cut -d'.' -f2)
+            docker tag "hollodotme/readis" "hollodotme/readis:${TAG}"
+            docker tag "hollodotme/readis" "hollodotme/readis:${FEATURE}"
+            docker tag "hollodotme/readis" "hollodotme/readis:${MAJOR}"
+      - run:
+          name: Login to hub.docker.com
+          command: |
+            echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USER --password-stdin
+      - run:
+          name: Push docker image
+          command: docker push "hollodotme/readis"
+
+workflows:
+  version: 2
+  build:
+    filters:
+      branches:
+        only:
+          - master
+    jobs:
+      - build
+
+  scheduled:
+    triggers:
+      - schedule:
+          cron: "44 2 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
