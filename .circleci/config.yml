@@ -18,7 +18,7 @@ jobs:
           name: Tag image
           command: |
             TAG=$(git describe --exact-match ${CIRCLE_SHA1} | sed -e s/v//g)
-            MAJOR=$(echo ${RAW_TAG} | cut -d'.' -f1)
+            MAJOR=$(echo ${TAG} | cut -d'.' -f1)
             FEATURE=${MAJOR}.$(echo ${TAG} | cut -d'.' -f2)
             docker tag "hollodotme/readis" "hollodotme/readis:${TAG}"
             docker tag "hollodotme/readis" "hollodotme/readis:${FEATURE}"
