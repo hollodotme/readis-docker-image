@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/hollodotme/readis-docker-image.svg?style=svg)](https://circleci.com/gh/hollodotme/readis-docker-image)
+
 # re<sup>a</sup>dis docker image
 
 ## Description
