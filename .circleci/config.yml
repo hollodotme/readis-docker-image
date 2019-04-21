@@ -34,14 +34,13 @@ jobs:
 workflows:
   version: 2
   build-push:
-    filters:
-      branches:
-        only:
-          - master
     jobs:
       - build:
           context: dockerhub
-
+          filters:
+            branches:
+              only:
+                - master
   scheduled:
     triggers:
       - schedule:
