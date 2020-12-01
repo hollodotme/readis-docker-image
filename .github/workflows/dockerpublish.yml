@@ -36,11 +36,11 @@ jobs:
         run: docker build --pull -f ./.docker/Dockerfile -t "${{ env.IMAGE_NAME }}" ./.docker
 
       - name: Log into Docker Hub
-        if: matrix.registry == 'docker'
+        if: matrix.registry == 'docker' && (startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/tags'))
         run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ github.actor }}" --password-stdin
 
       - name: Log into GitHub container registry
-        if: matrix.registry == 'github'
+        if: matrix.registry == 'github' && (startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/tags'))
         run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
       - name: Determine image identifier for Docker Hub
@@ -55,6 +55,7 @@ jobs:
         run: echo "NORMALIZED_IMAGE_ID=$(echo ${{ env.IMAGE_ID}} | tr '[A-Z]' '[a-z]')" >> $GITHUB_ENV
 
       - name: Push latest image
+        if: startsWith(github.ref, 'refs/heads/master')
         run: |
           echo "IMAGE_ID: ${{ env.NORMALIZED_IMAGE_ID }}"
           echo "VERSION: latest"
