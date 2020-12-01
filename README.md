@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/hollodotme/readis-docker-image.svg?style=svg)](https://circleci.com/gh/hollodotme/readis-docker-image)
+![Docker Image Publishing](https://github.com/hollodotme/readis-docker-image/workflows/Docker%20Image%20Publishing/badge.svg)
 
 # re<sup>a</sup>dis docker image
 
