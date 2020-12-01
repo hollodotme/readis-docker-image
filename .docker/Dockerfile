@@ -1,28 +1,28 @@
-FROM php:7.3-cli-alpine
-ENV PHPREDIS_VERSION 4.3.0
-ENV READIS_VERSION 2.2.1
-# System update and necessary software
-RUN apk update && apk upgrade && apk add --no-cache $PHPIZE_DEPS git icu-dev g++ procps
-# Install intl-extension
-RUN docker-php-ext-install intl
-# Install redis extension
-RUN mkdir -p /usr/src/php/ext/redis \
-   && curl -L https://github.com/phpredis/phpredis/archive/${PHPREDIS_VERSION}.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
-   && echo 'redis' >> /usr/src/php-available-exts \
-   && docker-php-ext-install redis
-COPY composer/install_composer.sh /install_composer.sh
-# Install composer
-RUN sh /install_composer.sh --install-dir=/bin --filename=composer
-# Install readis
-RUN git clone https://github.com/hollodotme/readis.git /code \
-   && cd /code \
-   && git checkout v${READIS_VERSION} \
-   && composer install -a --no-dev --no-interaction
-# Clean up
-RUN apk del $PHPIZE_DEPS git g++ \
-   && rm -f /bin/composer \
-   && rm -f /install_composer.sh \
-   && rm -rf /var/cache/apk/*
-# Startup command
+FROM amd64/php:8.0-cli-alpine
+ARG PHPREDIS_VERSION="5.3.2"
+ARG READIS_VERSION="v2.2.2"
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+RUN set -ex \
+	&& apk update \
+	&& apk upgrade --available \
+	&& apk add --no-cache $PHPIZE_DEPS icu-dev \
+	&& docker-php-ext-install intl \
+	&& mkdir -p "/usr/src/php/ext/redis" \
+    && curl -fsSL "https://github.com/phpredis/phpredis/archive/${PHPREDIS_VERSION}.tar.gz" | tar xvz -C "/usr/src/php/ext/redis" --strip 1 \
+    && echo 'redis' >> "/usr/src/php-available-exts" \
+    && docker-php-ext-install redis \
+    && rm -rf "/usr/src/php/ext/redis" \
+    && mkdir -p "/code" \
+	&& curl -fsSL "https://github.com/hollodotme/readis/archive/${READIS_VERSION}.tar.gz" | tar xvz -C "/code" --strip 1 \
+    && cd "/code" \
+    && /usr/bin/composer install -a --no-dev --no-interaction --ignore-platform-req=ext-xdebug \
+    && apk del $PHPIZE_DEPS \
+    && rm -f /usr/bin/composer \
+    && rm -rf /var/cache/apk/* \
+    && rm -rf /tmp/*
+
 EXPOSE 80
+
 CMD ["php", "-S", "0.0.0.0:80", "-t", "/code/public"]
