@@ -25,19 +25,19 @@ jobs:
             url: "docker.io"
             image-name: "readis"
             user: "hollodotme"
-            password: "${{ secrets.DOCKER_HUB_PASSWORD }}"
+            password: "DOCKER_HUB_PASSWORD"
           - registry: "GitHub container registry"
             url: "ghcr.io"
             image-name: "readis"
             user: "${{ github.actor }}"
-            password: "${{ secrets.GHCR_TOKEN }}"
+            password: "GHCR_TOKEN"
 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
       - name: Log into registry
-        run: echo "${{ matrix.password }}" | docker login "${{ matrix.url }}" -u "${{ matrix.user }}" --password-stdin
+        run: echo "${{ secrets.${{ matrix.password }} }}" | docker login "${{ matrix.url }}" -u "${{ matrix.user }}" --password-stdin
 
       - name: Build image
         run: docker build --pull -f ./.docker/Dockerfile -t "${{ matrix.image-name }}" ./.docker
