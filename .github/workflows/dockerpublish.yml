@@ -61,7 +61,7 @@ jobs:
           echo "VERSION: latest"
 
           docker tag "${{ env.IMAGE_NAME }}" "${{ env.NORMALIZED_IMAGE_ID }}:latest"
-          docker push "${{ env.MORMALIZED_IMAGE_ID }}"
+          docker push "${{ env.NORMALIZED_IMAGE_ID }}"
 
       - name: Push release image
         if: startsWith(github.ref, 'refs/tags/')
