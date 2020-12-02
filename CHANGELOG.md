@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres
 to [Semantic Versioning](http://semver.org/) and [Keep a CHANGELOG](http://keepachangelog.com).
 
+## [2.2.3] - 2020-12-02
+
+- Improve image build and push workflow, thanks [@localheinz](https://github.com/localheinz) - [#1]
+
 ## [2.2.2] - 2020-12-01
 
 ### Updated
@@ -35,12 +39,6 @@ to [Semantic Versioning](http://semver.org/) and [Keep a CHANGELOG](http://keepa
 
 - readis version to 2.2.0
 
-## [2.2.0] - 2018-06-27
-
-### Updated
-
-- readis version to 2.2.0
-
 ## [2.1.0] - 2018-05-14
 
 ### Updated
@@ -53,7 +51,9 @@ to [Semantic Versioning](http://semver.org/) and [Keep a CHANGELOG](http://keepa
 
 First stable release for re<sup>a</sup>dis v2.0.0
 
-[2.2.2]: https://github.com/hollodotme/readis-docker-image/compare/v2.2.2...v2.2.2
+[2.2.3]: https://github.com/hollodotme/readis-docker-image/compare/v2.2.2...v2.2.3
+
+[2.2.2]: https://github.com/hollodotme/readis-docker-image/compare/v2.2.1...v2.2.2
 
 [2.2.1]: https://github.com/hollodotme/readis-docker-image/compare/v2.2.0...v2.2.1
 
@@ -62,3 +62,5 @@ First stable release for re<sup>a</sup>dis v2.0.0
 [2.1.0]: https://github.com/hollodotme/readis-docker-image/compare/v2.0.0...v2.1.0
 
 [2.0.0]: https://github.com/hollodotme/readis-docker-image/tree/v2.0.0
+
+[#1]: https://github.com/hollodotme/readis-docker-image/pull/1
