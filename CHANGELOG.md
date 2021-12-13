@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file. This project adheres
 to [Semantic Versioning](http://semver.org/) and [Keep a CHANGELOG](http://keepachangelog.com).
 
+## [2.2.4] - 2021-12-13
+
+- Reduce image size by
+  using [mlocati/php-extension-installer](https://github.com/mlocati/docker-php-extension-installer)
+
 ## [2.2.3] - 2020-12-02
 
 - Improve image build and push workflow, thanks [@localheinz](https://github.com/localheinz) - [#1]
@@ -50,6 +55,8 @@ to [Semantic Versioning](http://semver.org/) and [Keep a CHANGELOG](http://keepa
 ## [2.0.0] - 2018-04-07
 
 First stable release for re<sup>a</sup>dis v2.0.0
+
+[2.2.4]: https://github.com/hollodotme/readis-docker-image/compare/v2.2.4...v2.2.4
 
 [2.2.3]: https://github.com/hollodotme/readis-docker-image/compare/v2.2.2...v2.2.3
 

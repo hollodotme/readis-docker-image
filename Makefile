@@ -3,7 +3,8 @@ DEV_TAG=0.0.0-dev
 IMAGE_NAME=hollodotme/readis
 
 build:
-	docker build --pull -f ./.docker/Dockerfile -t "$(IMAGE_NAME)" ./.docker
+	docker pull mlocati/php-extension-installer
+	docker build --pull -f ./.docker/Dockerfile -t "$(IMAGE_NAME)" --target=readis ./.docker
 .PHONY: build
 
 push: build
